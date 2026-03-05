@@ -223,3 +223,32 @@ Maps 25+ weather codes to:
 - ✅ Disabled automatic geolocation - users must manually search and select location
 - ✅ Comment: Geolocation feature commented out, available for future re-activation
 - ✅ Fixed: Auto-fetch weather when location is selected from dropdown (no need to click Update manually)
+
+## UI/UX Updates (March 5, 2026)
+- ✅ Replaced location emoji (📍) with map-pin.png image icon
+  - Location label: Now displays image instead of emoji
+  - Location display: Shows map-pin.png icon with "Not selected" text
+  - Image path: Assets/map-pin.png
+  - Inline styling applied for proper vertical alignment and sizing
+- ✅ Replaced date emoji (📅) with calendar.png image icon
+  - Date label: Now displays image instead of emoji
+  - Image path: Assets/calendar.png
+  - Inline styling applied for proper vertical alignment and sizing
+- ✅ Replaced weekly forecast emoji (📆) with calendar-days.png image icon
+  - Weekly Forecast section title: Now displays image instead of emoji
+  - Image path: Assets/calendar-days.png
+  - Inline styling applied for proper vertical alignment and sizing
+- ✅ Replaced time emoji (🕐) with clock-8.png image icon
+  - Time label: Now displays image instead of emoji
+  - Image path: Assets/clock-8.png
+  - Inline styling applied for proper vertical alignment and sizing
+- ✅ Replaced hourly forecast emoji (⏰) with clock-8.png image icon
+  - Hourly Forecast section title: Now displays image instead of emoji
+  - Image path: Assets/clock-8.png
+  - Inline styling applied for proper vertical alignment and sizing
+
+## Bug Fixes (March 5, 2026)
+- ✅ Fixed location display not updating when new city is selected
+  - Issue: selectLocation() was using .textContent which overwrote the map-pin.png image
+  - Solution: Changed to .innerHTML to preserve image while updating location name
+  - Result: New selected city now properly displays with map-pin icon
