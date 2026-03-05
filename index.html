@@ -242,8 +242,12 @@
           id="location-input"
           type="text" 
           placeholder="Search city or coordinates..." 
-          class="w-full bg-white border border-slate-200 rounded-custom py-3 pl-12 pr-4 shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+          class="w-full bg-white border border-slate-200 rounded-custom py-3 pl-12 pr-12 shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
         />
+        <!-- locate button -->
+        <button id="locate-btn" type="button" class="absolute inset-y-0 right-0 pr-4 flex items-center">
+          <img src="Assets/locate.png" alt="locate" class="h-5 w-5 text-slate-400" />
+        </button>
       </div>
       <div id="location-suggestions" class="absolute mt-1 w-full bg-white border border-slate-200 rounded-custom shadow-lg hidden max-h-48 overflow-y-auto z-10"></div>
     </div>
@@ -619,6 +623,32 @@
   setInterval(updateDateTime, 60000);
 
   // Automatic geolocation disabled - users must manually select location
+  
+  // --- locate button handler -------------------------------------------------
+  function locateUser() {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        // Open-Meteo geocoding search endpoint does not support reverse lookup by coordinates.
+        // Instead, show a placeholder name using coordinates and fetch weather directly.
+        const name = `Your location (${latitude.toFixed(2)}, ${longitude.toFixed(2)})`;
+        selectLocation(latitude, longitude, name);
+        fetchWeatherData();
+      },
+      (error) => {
+        console.log('Geolocation denied or unavailable', error);
+        alert('Unable to access your location');
+      }
+    );
+  }
+
+  document.getElementById('locate-btn').addEventListener('click', locateUser);
+
   // if (navigator.geolocation) {
   //   navigator.geolocation.getCurrentPosition(
   //     (position) => {

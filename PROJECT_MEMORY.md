@@ -252,3 +252,13 @@ Maps 25+ weather codes to:
   - Issue: selectLocation() was using .textContent which overwrote the map-pin.png image
   - Solution: Changed to .innerHTML to preserve image while updating location name
   - Result: New selected city now properly displays with map-pin icon
+
+## Features (March 5, 2026)
+- ✅ Added locate button inside location search field
+  - Positioned `locate.png` on right inside search input
+  - Clicking icon triggers browser geolocation
+  - Uses latitude/longitude to fetch weather; displays coordinates as name since API doesn't support reverse search
+  - Automatically selects location and fetches weather data
+  - Places handler in JS and updates event listeners
+  - Improves usability for quickly detecting current location
+  - Updated handler to remove failing reverse-geocode call and avoid error message when user allows location
